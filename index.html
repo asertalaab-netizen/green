@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GREEN - Engineering & Environmental Consulting</title>
+    <!-- Google Fonts & FontAwesome for icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Theme Variables */
+        :root {
+            --primary-green: #00E676;
+            --dark-green: #1B5E20;
+            --light-green: #69F0AE;
+            --accent-green: #B9F6CA;
+            
+            /* Default: Dark Mode Variables */
+            --bg-dark: #0a0f0d;
+            --bg-card: rgba(25, 35, 28, 0.7);
+            --bg-light-section: rgba(14, 22, 17, 0.8);
+            --text-main: #f1f8f5;
+            --text-muted: #94b39e;
+            --border-color: rgba(0, 230, 118, 0.15);
+            --header-bg: rgba(10, 15, 13, 0.85);
+            --footer-bg: #050807;
+            --glow-shadow: 0 8px 32px 0 rgba(0, 230, 118, 0.1);
+        }
+
+        /* Light Theme Overrides */
+        [data-theme="light"] {
+            --bg-dark: #f4f9f5;
+            --bg-card: rgba(255, 255, 255, 0.85);
+            --bg-light-section: #e8f5e9;
+            --text-main: #1a2e22;
+            --text-muted: #4a6b55;
+            --border-color: rgba(46, 125, 50, 0.2);
+            --header-bg: rgba(244, 249, 245, 0.85);
+            --footer-bg: #112618;
+            --light-green: #2E7D32;
+            --glow-shadow: 0 8px 32px 0 rgba(46, 125, 50, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+            transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            color: var(--text-main);
+            background-color: var(--bg-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 10% 20%, rgba(0, 230, 118, 0.03) 0%, transparent 40%),
+                              radial-gradient(circle at 90% 80%, rgba(46, 125, 50, 0.03) 0%, transparent 40%);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ================= SCROLL ANIMATION CLASSES ================= */
+        .reveal-from-bottom {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal-from-bottom.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .reveal-scale.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Header & Navbar */
+        header {
+            background: var(--header-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 1001;
+        }
+
+        .logo-container img {
+            height: 45px;
+            width: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-green);
+            box-shadow: 0 0 10px rgba(0, 230, 118, 0.3);
+            animation: pulseLogo 3s infinite ease-in-out;
+        }
+
+        @keyframes pulseLogo {
+            0%, 100% { box-shadow: 0 0 10px rgba(0, 230, 118, 0.3); }
+            50% { box-shadow: 0 0 22px rgba(0, 230, 118, 0.7); }
+        }
+
+        .logo-text h1 {
+            font-size: 1.3rem;
+            color: var(--light-green);
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .logo-text p {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: var(--text-main);
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-green);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--light-green);
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: var(--glow-shadow);
+            transition: transform 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+            z-index: 1001;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1) rotate(15deg);
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        /* Mobile Menu Toggle Button (Hamburger) */
+        .menu-toggle {
+            display: none;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+            box-shadow: var(--glow-shadow);
+            z-index: 1001;
+            transition: border-color 0.3s ease, color 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(10, 15, 13, 0.9), rgba(5, 10, 8, 0.85)), url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            color: #ffffff;
+            text-align: center;
+            padding: 160px 20px;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.6) 90%);
+        }
+
+        .hero > div {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h2 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(45deg, #ffffff, var(--light-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: heroTextGlow 4s infinite alternate;
+        }
+
+        @keyframes heroTextGlow {
+            0% { filter: drop-shadow(0 2px 10px rgba(0,230,118,0.2)); }
+            100% { filter: drop-shadow(0 2px 25px rgba(0,230,118,0.5)); }
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 750px;
+            margin: 0 auto 35px;
+            font-weight: 400;
+            color: #d0ded5;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+            color: #ffffff;
+            padding: 14px 35px;
+            border-radius: 35px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0, 230, 118, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 230, 118, 0.4);
+            filter: brightness(1.1);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.3rem;
+            color: var(--light-green);
+            margin-bottom: 15px;
+            font-weight: 800;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            background: var(--primary-green);
+            bottom: -12px;
+            left: calc(50% - 30px);
+            border-radius: 2px;
+            transition: width 0.4s ease;
+        }
+
+        .section-title:hover h2::after {
+            width: 100px;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-top: 20px;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Grid Layouts for Work */
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .work-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--glow-shadow);
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), border-color 0.4s ease, box-shadow 0.4s ease, opacity 0.6s ease;
+        }
+
+        .work-card:hover {
+            transform: translateY(-10px) scale(1.01);
+            border-color: var(--primary-green);
+            box-shadow: 0 20px 40px rgba(0, 230, 118, 0.2);
+        }
+
+        .work-card.hidden-card {
+            display: none;
+        }
+
+        .image-wrapper {
+            position: relative;
+            overflow: hidden;
+            height: 280px;
+            cursor: pointer;
+        }
+
+        .work-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .image-wrapper:hover img {
+            transform: scale(1.1) rotate(1deg);
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.2));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .image-overlay i {
+            color: #ffffff;
+            font-size: 1.5rem;
+            background: rgba(0, 230, 118, 0.85);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transform: scale(0.6) rotate(-45deg);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 15px rgba(0, 230, 118, 0.5);
+        }
+
+        .image-wrapper:hover .image-overlay {
+            opacity: 1;
+        }
+
+        .image-wrapper:hover .image-overlay i {
+            transform: scale(1) rotate(0deg);
+        }
+
+        .work-card-content {
+            padding: 24px;
+            text-align: center;
+        }
+
+        .work-card-content h3 {
+            font-size: 1.2rem;
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        .see-more-container {
+            text-align: center;
+            margin-top: 45px;
+        }
+
+        .see-more-btn {
+            background: transparent;
+            color: var(--primary-green);
+            border: 2px solid var(--primary-green);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--glow-shadow);
+        }
+
+        .see-more-btn:hover {
+            background: var(--primary-green);
+            color: #000;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 230, 118, 0.3);
+        }
+
+        .bg-light {
+            background-color: var(--bg-light-section);
+            max-width: 100%;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .bg-light .inner-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Lightbox Modal */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(8px);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+            animation: fadeInModal 0.3s ease forwards;
+        }
+
+        @keyframes fadeInModal {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 85vh;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            object-fit: contain;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            animation: zoomInImage 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        @keyframes zoomInImage {
+            from { transform: scale(0.85); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #ffffff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: color 0.3s, transform 0.3s;
+            background: rgba(255, 255, 255, 0.05);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .lightbox-close:hover {
+            color: var(--primary-green);
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(90deg);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, var(--footer-bg), var(--bg-dark));
+            color: #ffffff;
+            padding: 100px 20px 40px;
+            border-top: 2px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 230, 118, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .contact-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 35px 25px;
+            box-shadow: var(--glow-shadow);
+            transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+            text-align: center;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-green);
+            box-shadow: 0 20px 40px rgba(0, 230, 118, 0.2);
+        }
+
+        .contact-icon-box {
+            width: 70px;
+            height: 70px;
+            background: rgba(0, 230, 118, 0.1);
+            border: 2px solid var(--primary-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.6rem;
+            color: var(--primary-green);
+            box-shadow: 0 0 20px rgba(0, 230, 118, 0.25);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .contact-card:hover .contact-icon-box {
+            transform: scale(1.15) rotate(15deg);
+        }
+
+        .contact-card h3 {
+            font-size: 1.3rem;
+            color: var(--light-green);
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .contact-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            word-break: break-word;
+        }
+
+        .contact-link {
+            display: inline-block;
+            margin-top: 12px;
+            background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+            color: #ffffff;
+            padding: 9px 22px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            box-shadow: 0 5px 15px rgba(0, 230, 118, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            transform: scale(1.05);
+            filter: brightness(1.15);
+            color: #ffffff;
+        }
+
+        /* Social Media Icons Grid */
+        .social-icons-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .social-icon-btn {
+            width: 45px;
+            height: 45px;
+            background: rgba(0, 230, 118, 0.08);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon-btn:hover {
+            background: var(--primary-green);
+            color: #000;
+            transform: translateY(-5px) scale(1.15);
+            border-color: var(--primary-green);
+            box-shadow: 0 8px 20px rgba(0, 230, 118, 0.4);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 25px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* ================= RESPONSIVE DESIGN & MOBILE NAV ================= */
+        @media (max-width: 992px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: var(--header-bg);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 25px;
+                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+                border-left: 1px solid var(--border-color);
+                transition: right 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 120px 15px;
+            }
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            section {
+                padding: 70px 15px;
+            }
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            .section-title p {
+                font-size: 0.95rem;
+            }
+            .logo-text h1 {
+                font-size: 1.1rem;
+            }
+            .logo-text p {
+                font-size: 0.55rem;
+            }
+            .logo-container img {
+                height: 38px;
+                width: 38px;
+            }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+
+    <!-- Header & Navbar -->
+    <header>
+        <div class="navbar">
+            <div class="logo-container">
+                <img src="logo.png" alt="GREEN Logo">
+                <div class="logo-text">
+                    <h1>GREEN</h1>
+                    <p>Engineering designs & consultations</p>
+                </div>
+            </div>
+            <div class="nav-right">
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home" onclick="closeMenu()">Home</a></li>
+                    <li><a href="#facilities" onclick="closeMenu()">Public</a></li>
+                    <li><a href="#residential" onclick="closeMenu()">Residential</a></li>
+                    <li><a href="#sports" onclick="closeMenu()">Sports</a></li>
+                    <li><a href="#recreational" onclick="closeMenu()">Recreational</a></li>
+                    <li><a href="#interior" onclick="closeMenu()">Interior</a></li>
+                    <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+                </ul>
+                <button class="theme-toggle" id="themeToggleBtn" onclick="toggleTheme()" aria-label="Toggle dark/light mode">
+                    <i class="fas fa-sun" id="themeIcon"></i>
+                </button>
+                <button class="menu-toggle" id="menuToggleBtn" onclick="toggleMenu()" aria-label="Toggle navigation menu">
+                    <i class="fas fa-bars" id="menuIcon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero" style="max-width: 100%;">
+        <div style="max-width: 1200px; margin: 0 auto;" class="reveal-scale">
+            <h2>GREEN Engineering designs & consultations</h2>
+            <p>Providing expert engineering, modern infrastructure, and comprehensive architectural design for public, residential, sports, and recreational facilities.</p>
+            <a href="#contact" class="btn">Get in Touch</a>
+        </div>
+    </section>
+
+    <!-- Public, Administrative, and Service Facilities Section -->
+    <div class="bg-light">
+        <section id="facilities">
+            <div class="inner-container">
+                <div class="section-title reveal-from-bottom">
+                    <h2>Public, Administrative, & Service buildings</h2>
+                    <p>Delivering robust structural planning, architectural mastery, and sustainable systems for public and business entities.</p>
+                </div>
+                <div class="work-grid">
+                    <div class="work-card reveal-from-bottom" style="transition-delay: 0.1s;">
+                        <div class="image-wrapper" onclick="openLightbox(this)">
+                            <img src="hall.jpeg" alt="Modern wedding hall">
+                            <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                        </div>
+                        <div class="work-card-content">
+                            <h3>Modern wedding hall</h3>
+                        </div>
+                    </div>
+                    <div class="work-card reveal-from-bottom" style="transition-delay: 0.2s;">
+                        <div class="image-wrapper" onclick="openLightbox(this)">
+                            <img src="international_school.jpeg" alt="International school">
+                            <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                        </div>
+                        <div class="work-card-content">
+                            <h3>International school</h3>
+                        </div>
+                    </div>
+                    <div class="work-card reveal-from-bottom" style="transition-delay: 0.3s;">
+                        <div class="image-wrapper" onclick="openLightbox(this)">
+                            <img src="resala_association.jpeg" alt="Resala Association Building">
+                            <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                        </div>
+                        <div class="work-card-content">
+                            <h3>Resala Association Building</h3>
+                        </div>
+                    </div>
+                    <div class="work-card reveal-from-bottom" style="transition-delay: 0.4s;">
+                        <div class="image-wrapper" onclick="openLightbox(this)">
+                            <img src="city_gate.jpeg" alt="A city gate">
+                            <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                        </div>
+                        <div class="work-card-content">
+                            <h3>A city gate</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Residential Facilities Section -->
+    <section id="residential">
+        <div class="section-title reveal-from-bottom">
+            <h2>Residential buildings</h2>
+            <p>Designing and planning modern residential communities, housing projects, and sustainable living environments.</p>
+        </div>
+        <div class="work-grid">
+            <div class="work-card reveal-from-bottom" style="transition-delay: 0.1s;">
+                <div class="image-wrapper" onclick="openLightbox(this)">
+                    <img src="ho1 (1).jpeg" alt="Residential Project">
+                    <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+            </div>
+            <div class="work-card reveal-from-bottom" style="transition-delay: 0.2s;">
+                <div class="image-wrapper" onclick="openLightbox(this)">
+                    <img src="ho1 (2).jpeg" alt="Residential Project">
+                    <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+            </div>
+            <div class="work-card reveal-from-bottom" style="transition-delay: 0.3s;">
+                <div class="image-wrapper" onclick="openLightbox(this)">
+                    <img src="ho1 (3).jpeg" alt="Residential Project">
+                    <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+            </div>
+            <div class="work-card reveal-from-bottom" style="transition-delay: 0.4s;">
+                <div class="image-wrapper" onclick="openLightbox(this)">
+                    <img src="ho1 (4).jpeg" alt="Residential Project">
+                    <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+            </div>
+            <div class="work-card reveal-from-bottom" style="transition-delay: 0.5s;">
+                <div class="image-wrapper" onclick="openLightbox(this)">
+                    <img src="ho1 (5).jpeg" alt="Residential Project">
+                    <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sports Fields and Facilities Section -->
+    <div class="bg-light">
+        <section id="sports">
+            <div class="inner-container">
+                <div class="section-title reveal-from-bottom">
+                    <h2>Sports Fields and buildings</h2>
+                    <p>Designing advanced sports complexes, athletic fields, and recreational facilities engineered for peak performance.</p>
+                </div>
+                <div class="work-grid">
+                    <div class="work-card reveal-from-bottom" style="transition-delay: 0.1s;">
+                        <div class="image-wrapper" onclick="openLightbox(this)">
+                            <img src="popo.jpeg" alt="Sports Facility 1">
+                            <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                        </div>
+                    </div>
+                    <div class="work-card reveal-from-bottom" style="transition-delay: 0.2s;">
+                        <div class="image-wrapper" onclick="openLightbox(this)">
+                            <img src="track.jpeg" alt="Sports Facility 2" >
+                            <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                        </div>
+                    </div>
+                    <div class="work-card reveal-from-bottom" style="transition-delay: 0.3s;">
+                        <div class="image-wrapper" onclick="openLightbox(this)">
+                            <img src="top.jpeg" alt="Sports Facility 3">
+                            <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Cafeterias, Terraces, Service and Recreational Facilities Section -->
+    <section id="recreational">
+        <div class="section-title reveal-from-bottom">
+            <h2>Cafeterias, Terraces, Service and Recreational Buildings</h2>
+            <p>Creating vibrant, comfortable, and aesthetically pleasing environments for leisure, dining, and social gatherings.</p>
+        </div>
+        <div class="work-grid" id="recreationalGrid">
+            <!-- Photo 1 (Visible) -->
+            <div class="work-card reveal-from-bottom" style="transition-delay: 0.1s;">
+                <div class="image-wrapper" onclick="openLightbox(this)">
+                    <img src="1 (1).jpeg" alt="Recreational Facility 1" onerror="this.src='https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=800&q=80'">
+                    <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+            </div>
+            <!-- Photo 2 (Visible) -->
+            <div class="work-card reveal-from-bottom" style="transition-delay: 0.2s;">
+                <div class="image-wrapper" onclick="openLightbox(this)">
+                    <img src="2.jpeg" alt="Recreational Facility 2" onerror="this.src='https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80'">
+                    <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+            </div>
+            <!-- Photo 3 (Visible) -->
+            <div class="work-card reveal-from-bottom" style="transition-delay: 0.3s;">
+                <div class="image-wrapper" onclick="openLightbox(this)">
+                    <img src="3.jpeg" alt="Recreational Facility 3" onerror="this.src='https://images.unsplash.com/photo-1537047902294-62a40c20a6ae?auto=format&fit=crop&w=800&q=80'">
+                    <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+            </div>
+            <!-- Photo 4 (Visible) -->
+            <div class="work-card reveal-from-bottom" style="transition-delay: 0.4s;">
+                <div class="image-wrapper" onclick="openLightbox(this)">
+                    <img src="4.jpeg" alt="Recreational Facility 4" onerror="this.src='https://images.unsplash.com/photo-1578474846511-04ba529f0b88?auto=format&fit=crop&w=800&q=80'">
+                    <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+            </div>
+            <!-- Photo 5 (Visible) -->
+            <div class="work-card reveal-from-bottom" style="transition-delay: 0.5s;">
+                <div class="image-wrapper" onclick="openLightbox(this)">
+                    <img src="5.jpeg" alt="Recreational Facility 5" onerror="this.src='https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=800&q=80'">
+                    <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+            </div>
+            <!-- Photo 6 (Visible) -->
+            <div class="work-card reveal-from-bottom" style="transition-delay: 0.6s;">
+                <div class="image-wrapper" onclick="openLightbox(this)">
+                    <img src="6.jpeg" alt="Recreational Facility 6" onerror="this.src='https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=800&q=80'">
+                    <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+            </div>
+            
+            <!-- Photo 7 (Hidden initially) -->
+            <div class="work-card hidden-card">
+                <div class="image-wrapper" onclick="openLightbox(this)">
+                    <img src="7.jpeg" alt="Recreational Facility 7" onerror="this.src='https://images.unsplash.com/photo-1525610553991-2bede1a236e2?auto=format&fit=crop&w=800&q=80'">
+                    <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+            </div>
+            <!-- Photo 8 (Hidden initially) -->
+            <div class="work-card hidden-card">
+                <div class="image-wrapper" onclick="openLightbox(this)">
+                    <img src="8.jpeg" alt="Recreational Facility 8" onerror="this.src='https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=800&q=80'">
+                    <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+            </div>
+            <!-- Photo 9 (Hidden initially) -->
+            <div class="work-card hidden-card">
+                <div class="image-wrapper" onclick="openLightbox(this)">
+                    <img src="9.jpeg" alt="Recreational Facility 9" onerror="this.src='https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80'">
+                    <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+            </div>
+            <!-- Photo 10 (Hidden initially) -->
+            <div class="work-card hidden-card">
+                <div class="image-wrapper" onclick="openLightbox(this)">
+                    <img src="10.jpeg" alt="Recreational Facility 10" onerror="this.src='https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&w=800&q=80'">
+                    <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+            </div>
+            <!-- Photo 11 (Hidden initially) -->
+            <div class="work-card hidden-card">
+                <div class="image-wrapper" onclick="openLightbox(this)">
+                    <img src="11.jpeg" alt="Recreational Facility 11" onerror="this.src='https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?auto=format&fit=crop&w=800&q=80'">
+                    <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+            </div>
+            <!-- Photo 12 (Hidden initially) -->
+            <div class="work-card hidden-card">
+                <div class="image-wrapper" onclick="openLightbox(this)">
+                    <img src="12.jpeg" alt="Recreational Facility 12" onerror="this.src='https://images.unsplash.com/photo-1561501900-3701fa6a0864?auto=format&fit=crop&w=800&q=80'">
+                    <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- See More Button -->
+        <div class="see-more-container reveal-from-bottom">
+            <button class="see-more-btn" id="seeMoreBtnRec" onclick="toggleSeeMore('recreationalGrid', 'seeMoreBtnRec')">See More</button>
+        </div>
+    </section>
+
+    <!-- Interior Design Section -->
+    <div class="bg-light">
+        <section id="interior">
+            <div class="inner-container">
+                <div class="section-title reveal-from-bottom">
+                    <h2>Interior Design</h2>
+                    <p>Transforming spaces into stunning, functional works of art with exceptional interior design and bespoke decor concepts.</p>
+                </div>
+                <div class="work-grid" id="interiorGrid">
+                    <!-- Photo 1 (Visible) -->
+                    <div class="work-card reveal-from-bottom" style="transition-delay: 0.1s;">
+                        <div class="image-wrapper" onclick="openLightbox(this)">
+                            <img src="d.jpeg" alt="Interior Design 1" onerror="this.src='https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80'">
+                            <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                        </div>
+                    </div>
+                    <!-- Photo 2 (Visible) -->
+                    <div class="work-card reveal-from-bottom" style="transition-delay: 0.2s;">
+                        <div class="image-wrapper" onclick="openLightbox(this)">
+                            <img src="d2.jpeg" alt="Interior Design 2" onerror="this.src='https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80'">
+                            <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                        </div>
+                    </div>
+                    <!-- Photo 3 (Visible) -->
+                    <div class="work-card reveal-from-bottom" style="transition-delay: 0.3s;">
+                        <div class="image-wrapper" onclick="openLightbox(this)">
+                            <img src="d3.jpeg" alt="Interior Design 3" onerror="this.src='https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80'">
+                            <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                        </div>
+                    </div>
+                    <!-- Photo 4 (Visible) -->
+                    <div class="work-card reveal-from-bottom" style="transition-delay: 0.4s;">
+                        <div class="image-wrapper" onclick="openLightbox(this)">
+                            <img src="d4.jpeg" alt="Interior Design 4" onerror="this.src='https://images.unsplash.com/photo-1616046229478-9901c5536a45?auto=format&fit=crop&w=800&q=80'">
+                            <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                        </div>
+                    </div>
+                    <!-- Photo 5 (Visible) -->
+                    <div class="work-card reveal-from-bottom" style="transition-delay: 0.5s;">
+                        <div class="image-wrapper" onclick="openLightbox(this)">
+                            <img src="d5.jpeg" alt="Interior Design 5" onerror="this.src='https://images.unsplash.com/photo-1615874959474-d609969a25ed?auto=format&fit=crop&w=800&q=80'">
+                            <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                        </div>
+                    </div>
+                    <!-- Photo 6 (Visible) -->
+                    <div class="work-card reveal-from-bottom" style="transition-delay: 0.6s;">
+                        <div class="image-wrapper" onclick="openLightbox(this)">
+                            <img src="d6.jpeg" alt="Interior Design 6" onerror="this.src='https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=800&q=80'">
+                            <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Photo 7 (Hidden initially) -->
+                    <div class="work-card hidden-card">
+                        <div class="image-wrapper" onclick="openLightbox(this)">
+                            <img src="d7.jpeg" alt="Interior Design 7" onerror="this.src='https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80'">
+                            <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                        </div>
+                    </div>
+                    <!-- Photo 8 (Hidden initially) -->
+                    <div class="work-card hidden-card">
+                        <div class="image-wrapper" onclick="openLightbox(this)">
+                            <img src="d8.jpeg" alt="Interior Design 8" onerror="this.src='https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80'">
+                            <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                        </div>
+                    </div>
+                    <!-- Photo 9 (Hidden initially) -->
+                    <div class="work-card hidden-card">
+                        <div class="image-wrapper" onclick="openLightbox(this)">
+                            <img src="d9.jpeg" alt="Interior Design 9" onerror="this.src='https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80'">
+                            <div class="image-overlay"><i class="fas fa-search-plus"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- See More Button for Interior -->
+                <div class="see-more-container reveal-from-bottom">
+                    <button class="see-more-btn" id="seeMoreBtnInterior" onclick="toggleSeeMore('interiorGrid', 'seeMoreBtnInterior')">See More</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contact Section -->
+    <footer id="contact" class="contact-section">
+        <div class="contact-container">
+            <div class="section-title reveal-from-bottom" style="margin-bottom: 50px;">
+                <h2 style="color: var(--light-green);">Get In Touch</h2>
+                <p>مكتب جرين للتصميمات والاستشارات الهندسية - الاستشاري الهندسي لنادي الحوار الرياضي</p>
+            </div>
+
+            <div class="contact-grid">
+                <!-- Card 1: Leadership & Office Info -->
+                <div class="contact-card reveal-from-bottom" style="transition-delay: 0.1s;">
+                    <div class="contact-icon-box">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>إدارة المكتب</h3>
+                    <p><strong>أ.د.م. استشاري / محمد قنديل</strong></p>
+                    <p>استشارات وتصميمات وخدمات هندسية متكاملة</p>
+                </div>
+
+                <!-- Card 2: Phone & WhatsApp -->
+                <div class="contact-card reveal-from-bottom" style="transition-delay: 0.2s;">
+                    <div class="contact-icon-box">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3>اتصل بنا أو واتساب</h3>
+                    <p><i class="fas fa-phone" style="color: var(--primary-green);"></i> 01505034348</p>
+                    <a href="https://wa.me/201505034348" target="_blank" class="contact-link">
+                        <i class="fab fa-whatsapp"></i> تواصل عبر الواتساب
+                    </a>
+                </div>
+
+                <!-- Card 3: Email & Social Media -->
+                <div class="contact-card reveal-from-bottom" style="transition-delay: 0.3s;">
+                    <div class="contact-icon-box">
+                        <i class="fas fa-share-nodes"></i>
+                    </div>
+                    <h3>تابعنا على المنصات</h3>
+                    <p><i class="fas fa-envelope" style="color: var(--primary-green);"></i> green.consult.eng@gmail.com</p>
+                    
+                    <!-- Social Media Links -->
+                    <div class="social-icons-wrapper">
+                        <a href="https://www.facebook.com/share/19QM9nSFs3/" target="_blank" class="social-icon-btn" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/green_engineering_consulting?stkn=MTZidmR1bm54bmVkZg==" target="_blank" class="social-icon-btn" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@green.eng.consult?lang=en-GB&is_from_webapp=1&sender_device=mobile&sender_web_id=7660191394590787093" target="_blank" class="social-icon-btn" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                       
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom reveal-from-bottom">
+                <p>&copy; 2026 GREEN Engineering & Environmental Consulting. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal Container -->
+    <div id="lightboxModal" class="lightbox-modal" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightboxImage">
+    </div>
+
+    <!-- Scripts for Lightbox, Theme Toggle, Mobile Menu, See More & Scroll Animation -->
+    <script>
+        // Lightbox Functions
+        function openLightbox(element) {
+            const modal = document.getElementById('lightboxModal');
+            const modalImg = document.getElementById('lightboxImage');
+            const img = element.querySelector('img');
+            
+            modal.classList.add('active');
+            modalImg.src = img.src;
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightboxModal');
+            modal.classList.remove('active');
+        }
+
+        // Theme Toggle Functions
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('themeIcon');
+            
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.setAttribute('data-theme', 'light');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        }
+
+        // Mobile Menu Toggle Functions
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            const menuIcon = document.getElementById('menuIcon');
+            
+            navLinks.classList.toggle('active');
+            
+            if (navLinks.classList.contains('active')) {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-times');
+            } else {
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            }
+        }
+
+        function closeMenu() {
+            const navLinks = document.getElementById('navLinks');
+            const menuIcon = document.getElementById('menuIcon');
+            
+            navLinks.classList.remove('active');
+            menuIcon.classList.remove('fa-times');
+            menuIcon.classList.add('fa-bars');
+        }
+
+        // Generic See More / See Less Toggle Functionality
+        function toggleSeeMore(gridId, btnId) {
+            const hiddenCards = document.querySelectorAll(`#${gridId} .hidden-card`);
+            const btn = document.getElementById(btnId);
+            
+            const isHidden = hiddenCards[0].style.display === 'block' || hiddenCards[0].style.display === 'grid';
+
+            hiddenCards.forEach((card, index) => {
+                card.style.display = isHidden ? 'none' : 'block';
+                if (!isHidden) {
+                    card.classList.add('reveal-from-bottom');
+                    setTimeout(() => card.classList.add('active'), 50 * index);
+                }
+            });
+
+            if (isHidden) {
+                btn.textContent = 'See More';
+            } else {
+                btn.textContent = 'See Less';
+            }
+        }
+
+        // Scroll Animation Observer (Intersection Observer)
+        document.addEventListener("DOMContentLoaded", function() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -50px 0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            const revealElements = document.querySelectorAll('.reveal-from-bottom, .reveal-scale');
+            revealElements.forEach(el => observer.observe(el));
+        });
+    </script>
+
+</body>
+</html>
