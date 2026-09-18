@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferrari Official Website | The Art of Speed & Luxury</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ferrari-red: #cc0000;
+            --ferrari-dark-red: #990000;
+            --dark-bg: #0b0b0b;
+            --card-bg: #141414;
+            --gold: #c5a059;
+            --text-light: #ffffff;
+            --text-gray: #a0a0a0;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Top Bar / Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 6%;
+            background: rgba(11, 11, 11, 0.85);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: var(--text-light);
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--ferrari-red);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover {
+            color: var(--ferrari-red);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .configurator-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: var(--text-light);
+            padding: 10px 22px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .configurator-btn:hover {
+            border-color: var(--ferrari-red);
+            background: var(--ferrari-red);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(to right, rgba(11,11,11,0.9), rgba(11,11,11,0.3)), 
+                        url('https://images.unsplash.com/photo-1583121274602-3e2820c69888?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=90') center/cover no-repeat;
+            padding: 0 6%;
+        }
+
+        .hero-content {
+            max-width: 700px;
+        }
+
+        .hero-subtitle {
+            font-size: 12px;
+            letter-spacing: 4px;
+            color: var(--ferrari-red);
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .hero-content h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 60px;
+            letter-spacing: 3px;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+
+        .hero-content p {
+            font-size: 15px;
+            color: var(--text-gray);
+            line-height: 1.7;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .btn-primary {
+            background: var(--ferrari-red);
+            color: #fff;
+            border: none;
+            padding: 16px 35px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background: var(--ferrari-dark-red);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(204, 0, 0, 0.4);
+        }
+
+        /* Models Section */
+        .models-section {
+            padding: 120px 6%;
+            background: var(--dark-bg);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 60px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 25px;
+        }
+
+        .section-header h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 38px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .section-header p {
+            color: var(--text-gray);
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .car-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .car-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .car-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(204, 0, 0, 0.5);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+        }
+
+        .car-img-container {
+            height: 260px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .car-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .car-card:hover .car-img {
+            transform: scale(1.08);
+        }
+
+        .car-details {
+            padding: 35px 30px;
+        }
+
+        .car-category {
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: var(--ferrari-red);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .car-details h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 24px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .car-desc {
+            color: var(--text-gray);
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .car-specs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 20px;
+        }
+
+        .spec-item span:first-child {
+            display: block;
+            font-size: 10px;
+            color: var(--text-gray);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .spec-item span:last-child {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-light);
+            letter-spacing: 1px;
+        }
+
+        /* Experience Section (Full-width banner) */
+        .experience-banner {
+            position: relative;
+            height: 70vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), 
+                        url('https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=90') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .experience-content max-width {
+            max-width: 800px;
+        }
+
+        .experience-banner h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 48px;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .experience-banner p {
+            color: var(--text-gray);
+            font-size: 15px;
+            max-width: 600px;
+            margin: 0 auto 35px auto;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        /* Footer */
+        footer {
+            background: #050505;
+            padding: 80px 6% 40px 6%;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) 2fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-col h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            text-decoration: none;
+            color: var(--text-gray);
+            font-size: 12px;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--ferrari-red);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 30px;
+            font-size: 11px;
+            color: var(--text-gray);
+            letter-spacing: 1px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            nav ul {
+                display: none;
+            }
+            .hero-content h1 {
+                font-size: 40px;
+            }
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation -->
+    <header>
+        <a href="#" class="logo">Ferrari<span>.</span></a>
+        <nav>
+            <ul>
+                <li><a href="#models">Models</a></li>
+                <li><a href="#configurator">Configurator</a></li>
+                <li><a href="#racing">Scuderia</a></li>
+                <li><a href="#heritage">Heritage</a></li>
+            </ul>
+        </nav>
+        <div class="nav-actions">
+            <button class="configurator-btn">Book a Test Drive</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-subtitle">Maranello Masterpiece</div>
+            <h1>The Art of Speed & Luxury</h1>
+            <p>Where cutting-edge aerodynamics meet timeless Italian craftsmanship. Experience the pinnacle of automotive engineering designed for the uncompromising few.</p>
+            <a href="#models" class="btn-primary">Explore Range</a>
+        </div>
+    </section>
+
+    <!-- Models Section -->
+    <section class="models-section" id="models">
+        <div class="section-header">
+            <div>
+                <p>The Lineup</p>
+                <h2>Current Models</h2>
+            </div>
+            <p>Maranello's finest creations</p>
+        </div>
+
+        <div class="car-grid">
+            <!-- Card 1 -->
+            <div class="car-card">
+                <div class="car-img-container">
+                    <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="SF90 Stradale" class="car-img">
+                </div>
+                <div class="car-details">
+                    <span class="car-category">Range Supercar</span>
+                    <h3>SF90 Stradale</h3>
+                    <p class="car-desc">The ultimate expression of extreme performance, blending a twin-turbo V8 with three electric motors.</p>
+                    <div class="car-specs">
+                        <div class="spec-item">
+                            <span>0-100 km/h</span>
+                            <span>2.5 s</span>
+                        </div>
+                        <div class="spec-item">
+                            <span>Maximum Power</span>
+                            <span>1000 cv</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="car-card">
+                <div class="car-img-container">
+                    <img src="https://images.unsplash.com/photo-1592198084033-aade902d1aae?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="296 GTB" class="car-img">
+                </div>
+                <div class="car-details">
+                    <span class="car-category">Berlinetta</span>
+                    <h3>296 GTB</h3>
+                    <p class="car-desc">Redefining the fun of driving with a revolutionary 120° V6 hybrid engine architecture.</p>
+                    <div class="car-specs">
+                        <div class="spec-item">
+                            <span>0-100 km/h</span>
+                            <span>2.9 s</span>
+                        </div>
+                        <div class="spec-item">
+                            <span>Maximum Power</span>
+                            <span>830 cv</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="car-card">
+                <div class="car-img-container">
+                    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Roma" class="car-img">
+                </div>
+                <div class="car-details">
+                    <span class="car-category">Grand Tourer</span>
+                    <h3>Ferrari Roma</h3>
+                    <p class="car-desc">Featuring refined proportions and timeless elegance, capturing the carefree lifestyle of 1950s Rome.</p>
+                    <div class="car-specs">
+                        <div class="spec-item">
+                            <span>0-100 km/h</span>
+                            <span>3.4 s</span>
+                        </div>
+                        <div class="spec-item">
+                            <span>Maximum Power</span>
+                            <span>620 cv</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Banner -->
+    <section class="experience-banner">
+        <div class="experience-content">
+            <h2>Born on the Track</h2>
+            <p>Every Ferrari road car benefits directly from Scuderia Ferrari's relentless pursuit of motorsport excellence in Formula 1.</p>
+            <a href="#racing" class="btn-primary">Discover Scuderia</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Racing</h4>
+                <ul>
+                    <li><a href="#">Scuderia Ferrari</a></li>
+                    <li><a href="#">Carlos Sainz</a></li>
+                    <li><a href="#">Charles Leclerc</a></li>
+                    <li><a href="#">Hypercar WEC</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Sports Cars</h4>
+                <ul>
+                    <li><a href="#">Range Overview</a></li>
+                    <li><a href="#">Configurator</a></li>
+                    <li><a href="#">Certified Pre-Owned</a></li>
+                    <li><a href="#">Tailor Made</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Corporate</h4>
+                <ul>
+                    <li><a href="#">Sustainability</a></li>
+                    <li><a href="#">Media Center</a></li>
+                    <li><a href="#">Investors Relations</a></li>
+                    <li><a href="#">Careers at Ferrari</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 style="font-family: 'Cinzel', serif; font-size: 18px; letter-spacing: 3px;">Ferrari S.p.A.</h4>
+                <p style="color: var(--text-gray); font-size: 12px; line-height: 1.6; margin-top: 10px; font-weight: 300;">
+                    Via Abetone Inferiore n. 4<br>
+                    41053 Maranello (MO), Italy<br>
+                    Official Corporate Portal
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Ferrari S.p.A. - All rights reserved</p>
+            <p>Privacy Policy | Cookie Policy | Corporate Ethics</p>
+        </div>
+    </footer>
+
+</body>
+</html>

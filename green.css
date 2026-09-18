@@ -1,0 +1,531 @@
+/* Reset & Luxury Variables */
+:root {
+    --bg-primary: #050505;
+    --bg-secondary: #0a0a0c;
+    --bg-card: rgba(18, 18, 22, 0.75);
+    --accent-gold: #d4af37;
+    --accent-gold-light: #fef08a;
+    --accent-gold-hover: #e5c158;
+    --text-main: #f9fafb;
+    --text-muted: #9ca3af;
+    --border-color: rgba(212, 175, 55, 0.22);
+    --border-color-hover: rgba(212, 175, 55, 0.6);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    line-height: 1.8;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, blockquote {
+    font-family: 'Playfair Display', serif;
+}
+
+/* Ambient Background Dynamic Glows */
+.ambient-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.07) 0%, rgba(0,0,0,0) 70%);
+    border-radius: 50%;
+    z-index: 0;
+    pointer-events: none;
+    filter: blur(40px);
+}
+.glow-1 { top: 5%; left: -15%; }
+.glow-2 { top: 40%; right: -15%; }
+.glow-3 { top: 75%; left: 10%; }
+
+/* Scroll Animation Initial States */
+.reveal {
+    opacity: 0;
+    transform: translateY(45px);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Creative Curved Scroll Path Container */
+.creative-path-container {
+    position: relative;
+}
+
+.scroll-path-svg {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+#gold-path {
+    transition: stroke-dashoffset 0.1s ease-out;
+    filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.6));
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.6rem 6%;
+    background-color: rgba(5, 5, 5, 0.82);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.12);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    color: var(--accent-gold);
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+}
+
+.navbar nav {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.navbar nav a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    transition: color 0.3s ease;
+}
+
+.navbar nav a:hover {
+    color: var(--accent-gold);
+}
+
+.nav-btn {
+    border: 1px solid var(--accent-gold);
+    padding: 0.6rem 1.5rem !important;
+    color: var(--accent-gold) !important;
+    border-radius: 3px;
+    transition: all 0.3s ease !important;
+}
+
+.nav-btn:hover {
+    background-color: var(--accent-gold);
+    color: var(--bg-primary) !important;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+}
+
+/* Hero Section */
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10rem 2rem;
+    background: radial-gradient(circle at center, #14120e 0%, var(--bg-primary) 70%);
+    position: relative;
+    z-index: 1;
+}
+
+.hero-content {
+    max-width: 850px;
+}
+
+.sub-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.35em;
+    color: var(--accent-gold);
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--accent-gold);
+    padding-bottom: 0.4rem;
+}
+
+.hero-content h1 {
+    font-size: 4.2rem;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+}
+
+.hero-content h1 em {
+    font-style: italic;
+    color: var(--accent-gold);
+    text-shadow: 0 0 30px rgba(212, 175, 55, 0.25);
+}
+
+.hero-content p {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+    font-weight: 300;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+}
+
+/* Buttons Design */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2.2rem;
+    border-radius: 3px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.btn-arrow {
+    transition: transform 0.3s ease;
+}
+
+.primary-btn:hover .btn-arrow {
+    transform: translateX(5px);
+}
+
+.primary-btn {
+    background: linear-gradient(135deg, #d4af37 0%, #aa8228 100%);
+    color: #050505;
+    border: none;
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25);
+}
+
+.primary-btn:hover {
+    background: linear-gradient(135deg, #e5c158 0%, #bc9131 100%);
+    box-shadow: 0 6px 30px rgba(212, 175, 55, 0.45);
+    transform: translateY(-2px);
+}
+
+.secondary-btn {
+    background-color: transparent;
+    color: var(--text-main);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.secondary-btn:hover {
+    border-color: var(--accent-gold);
+    color: var(--accent-gold);
+    background-color: rgba(212, 175, 55, 0.05);
+    transform: translateY(-2px);
+}
+
+/* Philosophy & Portfolio Sections */
+.philosophy-section, .portfolio-section {
+    padding: 9rem 8%;
+    background-color: var(--bg-secondary);
+    position: relative;
+    z-index: 1;
+}
+
+.portfolio-section {
+    background-color: var(--bg-primary);
+    border-top: 1px solid rgba(255,255,255,0.03);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 5rem;
+}
+
+.gold-subtitle {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.4em;
+    color: var(--accent-gold);
+    display: block;
+    margin-bottom: 0.75rem;
+}
+
+.section-header h2 {
+    font-size: 2.8rem;
+    font-weight: 600;
+}
+
+.header-divider {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+    margin: 1.2rem auto 0 auto;
+}
+
+.luxury-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 2.5rem;
+}
+
+/* Ultra Luxury Cards with Glassmorphism & Borders */
+.luxury-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 3rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.luxury-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--border-color-hover);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(212, 175, 55, 0.12);
+}
+
+/* Image Background Cards with Cinematic Overlay */
+/* Glowing Image Cards */
+.image-card {
+    background-size: cover;
+    background-position: center;
+    padding: 0;
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 0 25px rgba(212, 175, 55, 0.15);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease;
+    filter: brightness(0.95) contrast(1.05);
+}
+
+.image-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent-gold);
+    /* Supercharged glowing aura */
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 60px rgba(212, 175, 55, 0.6), inset 0 0 40px rgba(212, 175, 55, 0.35);
+    /* Make the underlying image itself glow, brighten, and saturate */
+    filter: brightness(1.2) contrast(1.15) saturate(1.2);
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Darker initial overlay for deep contrast */
+    background: linear-gradient(135deg, rgba(5, 5, 8, 0.88) 0%, rgba(12, 12, 16, 0.72) 100%);
+    transition: background 0.4s ease, opacity 0.4s ease;
+    z-index: 1;
+}
+
+.image-card:hover .card-overlay {
+    /* Significantly fade out the dark overlay on hover so the glowing image shines right through */
+    background: linear-gradient(135deg, rgba(5, 5, 8, 0.55) 0%, rgba(12, 12, 16, 0.3) 100%);
+}
+
+.image-card .card-content {
+    position: relative;
+    z-index: 2;
+    padding: 3.5rem 2.5rem;
+}
+
+.card-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--accent-gold);
+    opacity: 0.45;
+    margin-bottom: 0.8rem;
+    transition: opacity 0.3s ease;
+}
+
+.image-card:hover .card-number {
+    opacity: 1;
+}
+
+.luxury-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.luxury-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+}
+
+.card-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent-gold);
+    background: rgba(212, 175, 55, 0.08);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    padding: 0.3rem 0.8rem;
+    border-radius: 2px;
+}
+
+/* Mouse Hover Spotlight Effect */
+.mouse-spotlight::after {
+    content: '';
+    position: absolute;
+    top: var(--y, 0);
+    left: var(--x, 0);
+    transform: translate(-50%, -50%);
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.18) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.mouse-spotlight:hover::after {
+    opacity: 1;
+}
+
+/* Editorial Quote Section */
+.editorial-section {
+    background: linear-gradient(rgba(5,5,5,0.88), rgba(5,5,5,0.88)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1600&auto=format&fit=crop') center/cover fixed;
+    padding: 10rem 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(212, 175, 55, 0.12);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.12);
+    position: relative;
+    z-index: 1;
+}
+
+.editorial-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.editorial-section blockquote {
+    font-size: 2.3rem;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.5;
+    margin-bottom: 1.8rem;
+    color: #ffffff;
+}
+
+.editorial-section cite {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.35em;
+    color: var(--accent-gold);
+    font-style: normal;
+}
+
+/* Inquiry Section */
+.inquiry-section {
+    padding: 9rem 8%;
+    background-color: var(--bg-secondary);
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.inquiry-container {
+    max-width: 700px;
+    margin: 0 auto;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 4rem 3.5rem;
+    border-radius: 6px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+}
+
+.inquiry-container h2 {
+    font-size: 2.8rem;
+    margin-bottom: 0.75rem;
+}
+
+.inquiry-container > p {
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+    font-weight: 300;
+}
+
+.luxury-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    text-align: left;
+}
+
+.form-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.4rem;
+}
+
+.luxury-form input,
+.luxury-form textarea {
+    width: 100%;
+    padding: 1.2rem 1.4rem;
+    background-color: rgba(10, 10, 14, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    color: var(--text-main);
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.luxury-form input:focus,
+.luxury-form textarea:focus {
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+}
+
+.luxury-form button {
+    width: 100%;
+    margin-top: 0.8rem;
+    padding: 1.2rem;
+    justify-content: center;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 3rem;
+    background-color: var(--bg-primary);
+    border-top: 1px solid rgba(212, 175, 55, 0.1);
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    position: relative;
+    z-index: 1;
+}
+
+/* Responsive Fixes */
+@media (max-width: 768px) {
+    .hero-content h1 { font-size: 2.8rem; }
+    .form-group { grid-template-columns: 1fr; }
+    .inquiry-container { padding: 2.5rem 1.5rem; }
+}
